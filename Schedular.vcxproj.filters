@@ -18,9 +18,6 @@
     <None Include="Schedular.ino" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="__vm\.Schedular.vsarduino.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Task.h">
       <Filter>Header Files</Filter>
     </ClInclude>

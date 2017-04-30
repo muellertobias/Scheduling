@@ -86,7 +86,6 @@
   <ItemGroup>
     <ClInclude Include="LedBlinkTask.h" />
     <ClInclude Include="Task.h" />
-    <ClInclude Include="__vm\.Schedular.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LedBlinkTask.cpp" />
