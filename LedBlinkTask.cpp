@@ -31,6 +31,7 @@ void LedBlinkTask::update()
 {
 	if (isExecutionTime()) {
 		digitalWrite(ledPin, toggle);
+		Serial.println(ledPin);
 		toggle = !toggle;
 		onAfterExecution();
 	}
