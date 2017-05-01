@@ -4,8 +4,20 @@
 
 #include "LedBlinkTask.h"
 
+LedBlinkTask::LedBlinkTask()
+{
+}
+
+void LedBlinkTask::init(uint16_t delay, uint16_t pin)
+{
+	Task::init(delay, pin);
+	ledPin = pin;
+	pinMode(ledPin, OUTPUT);
+}
+
 void LedBlinkTask::start()
 {
+	toggle = true;
 	Task::start();
 }
 
@@ -13,11 +25,6 @@ void LedBlinkTask::stop()
 {
 	digitalWrite(ledPin, false);
 	Task::stop();
-}
-
-LedBlinkTask::LedBlinkTask()
-{
-	toggle = true;
 }
 
 void LedBlinkTask::update()

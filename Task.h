@@ -12,10 +12,10 @@
 class Task
 {
  protected:
-	 byte ledPin;
 	 uint16_t delayTime;
 	 unsigned long lastExecutionTime;
 	 bool isRunning;
+	 bool canExecuted;
 
 	 bool isExecutionTime();
 	 void onAfterExecution();
@@ -23,10 +23,13 @@ class Task
  public:
 	 Task();
 
-	 void init(uint16_t pin, uint16_t delay);
-	 virtual void update() = 0;
-	 virtual void stop();
+	 virtual void init(uint16_t delay, uint16_t pin);
 	 virtual void start();
+	 virtual void stop();
+	 virtual void update() = 0;
+
+	 virtual void lock();
+	 virtual void unlock();
 };
 
 //extern TaskClass Task;

@@ -13,18 +13,18 @@
 
 class LedBlinkTask : public Task
 {
-private:
-
-
 protected:
-	 bool toggle;
-	 virtual void start();
-	 virtual void stop();
+	byte ledPin;
+	bool toggle;
 
 public:
 	LedBlinkTask();
 
-	 void update();
+	virtual void init(uint16_t delay, uint16_t pin);
+	virtual void start();
+	virtual void stop();
+	virtual void update();
+
 };
 
 

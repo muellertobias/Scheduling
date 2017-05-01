@@ -2,7 +2,7 @@
 #include "Task.h"
 #include <Keypad\Keypad.h>
 
-char keys[2][3]{
+byte keys[2][3]{
 	{ 1, 3, 5 },
 	{ 2, 4, 6 }
 };
@@ -17,9 +17,9 @@ Task* tasks[2];
 void setup()
 {
 	tasks[0] = new LedBlinkTask();
-	tasks[0]->init(12, 50);
+	tasks[0]->init(50, 12);
 	tasks[1] = new LedBlinkTask();
-	tasks[1]->init(13, 1000);
+	tasks[1]->init(1000, 13);
 
 	Serial.begin(9600);
 }
@@ -27,9 +27,7 @@ void setup()
 void loop()
 {
 	updateTasks();
-
 	updateKeys();
-
 }
 
 void updateTasks()
@@ -63,6 +61,14 @@ void interpretInteraction(char command, KeyState state)
 	switch (state)
 	{
 	case PRESSED:
+		if (command % 2 == 0) 
+		{
+			tasks[command + 1]->lock();
+		}
+		else 
+		{
+			tasks[command - 1]->lock();
+		}
 		tasks[command]->start();
 		break;
 	case HOLD:
@@ -71,6 +77,14 @@ void interpretInteraction(char command, KeyState state)
 		break;
 	case IDLE:
 		tasks[command]->stop();
+		if (command % 2 == 0)
+		{
+			tasks[command + 1]->unlock();
+		}
+		else
+		{
+			tasks[command - 1]->unlock();
+		}
 		break;
 	default:
 		break;

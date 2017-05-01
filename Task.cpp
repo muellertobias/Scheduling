@@ -8,15 +8,12 @@ Task::Task()
 {
 }
 
-void Task::init(uint16_t pin, uint16_t delay)
+void Task::init(uint16_t delay, uint16_t pin)
 {
-	ledPin = pin;
 	this->delayTime = delay;
-	pinMode(ledPin, OUTPUT);
 	lastExecutionTime = 0L;
 	isRunning = false;
 }
-
 
 void Task::start()
 {
@@ -26,11 +23,24 @@ void Task::start()
 void Task::stop()
 {
 	isRunning = false;
+	lastExecutionTime = 0L;
+}
+
+void Task::lock()
+{
+	if (!isRunning)
+		canExecuted = false;
+}
+
+void Task::unlock()
+{
+	if (!isRunning)
+		canExecuted = true;
 }
 
 bool Task::isExecutionTime()
 {
-	return lastExecutionTime + delayTime < millis() && isRunning;
+	return lastExecutionTime + delayTime < millis() && isRunning && canExecuted;
 }
 
 void Task::onAfterExecution()
