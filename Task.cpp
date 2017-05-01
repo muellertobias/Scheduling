@@ -14,27 +14,27 @@ void Task::init(uint16_t pin, uint16_t delay)
 	this->delayTime = delay;
 	pinMode(ledPin, OUTPUT);
 	lastExecutionTime = 0L;
-	//toggle = false;
+	isRunning = false;
+}
+
+
+void Task::start()
+{
+	isRunning = true;
+}
+
+void Task::stop()
+{
+	isRunning = false;
 }
 
 bool Task::isExecutionTime()
 {
-	return lastExecutionTime + delayTime < millis();
+	return lastExecutionTime + delayTime < millis() && isRunning;
 }
 
-void Task::onExecution()
+void Task::onAfterExecution()
 {
 	lastExecutionTime = millis();
 }
 
-//void Task::update()
-//{
-//	if (lastExecutionTime + delayTime < millis()) 
-//	{
-//		digitalWrite(ledPin, toggle);
-//		toggle = !toggle;
-//		lastExecutionTime = millis();
-//	}
-//}
-
-//TaskClass Task;

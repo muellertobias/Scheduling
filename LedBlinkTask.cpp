@@ -4,9 +4,20 @@
 
 #include "LedBlinkTask.h"
 
+void LedBlinkTask::start()
+{
+	Task::start();
+}
+
+void LedBlinkTask::stop()
+{
+	digitalWrite(ledPin, false);
+	Task::stop();
+}
+
 LedBlinkTask::LedBlinkTask()
 {
-	toggle = false;
+	toggle = true;
 }
 
 void LedBlinkTask::update()
@@ -14,6 +25,6 @@ void LedBlinkTask::update()
 	if (isExecutionTime()) {
 		digitalWrite(ledPin, toggle);
 		toggle = !toggle;
-		onExecution();
+		onAfterExecution();
 	}
 }

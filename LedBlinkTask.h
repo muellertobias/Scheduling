@@ -18,6 +18,8 @@ private:
 
 protected:
 	 bool toggle;
+	 virtual void start();
+	 virtual void stop();
 
 public:
 	LedBlinkTask();
